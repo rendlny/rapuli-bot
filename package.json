@@ -1,0 +1,11 @@
+{
+  "name": "rapuli-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for tracking weekly turnip stock prices for New Horizons. This bot is intended for small scale Discord servers for sharing prices between a friend group!",
+  "main": "bot.js",
+  "author": "Ren Delaney",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.2.1"
+  }
+}
