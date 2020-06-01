@@ -20,8 +20,6 @@ async def turnip_price(ctx, arg1):
     pin_content = last_pin.content
     await last_pin.edit(content=pin_content+"{}.".format(arg1))
 
-    await client.send_message(message.channel, ' : %s is the best ' % myid)
-
 @bot.command(name='start')
 async def bot_setup(ctx):
     if ctx.author.id == 207867044140417025:
