@@ -1,39 +1,48 @@
 import discord
-
-from dotenv import load_dotenv
-load_dotenv()
 import os
+from discord.ext.commands import Bot
+from discord.ext import commands
+from dotenv import load_dotenv
 
+# load in discord token from .env file
+load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
-client = discord.Client()
+# set bots command prefix
+bot = commands.Bot(command_prefix='~')
 
-print('STARTING')
+@bot.command(name='turnip')
+async def turnip_price(ctx, arg1):
+    await ctx.message.delete()
 
-@client.event
-async def on_message(message):
-    # prevent bot to replying to itself
-    if message.author == client.user:
-        return
+    pins = await ctx.channel.pins()  # or await channel.pins()
+    last_pin = pins[-1]
+    pin_content = last_pin.content
+    await last_pin.edit(content=pin_content+"{}.".format(arg1))
 
-    if message.content.startswith('~turnip'):
-        sent = message.content
+    await client.send_message(message.channel, ' : %s is the best ' % myid)
 
-        try:
-            sentparts = sent.split(' ')
-            price = sentparts[1]
-            msg = price+'Hello {0.author.mention}'.format(message)
-        except IndexError:
-            msg = 'Please provide your current turnip price'
-        else:
-            msg = 'Please provide your current turnip price'
-        await message.channel.send(msg)
+@bot.command(name='start')
+async def bot_setup(ctx):
+    if ctx.author.id == 207867044140417025:
+        await ctx.channel.purge(limit=None)
+        message = await ctx.channel.send("STARTING")
+        msg_format = """__TURNIP STONKS__
+        {} => https://turnipprophet.io/?prices=""".format(ctx.message.author.mention)
+        await message.edit(content=msg_format)
+        await message.pin()
+        await ctx.message.delete()
 
-@client.event
+@bot.command(name='purge')
+async def clear_channel(ctx):
+    if ctx.author.id == 207867044140417025:
+        await ctx.channel.purge(limit=None, check=lambda msg: not msg.pinned)
+
+@bot.event
 async def on_ready():
     print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
+    print(bot.user.name)
+    print(bot.user.id)
     print('------')
 
-client.run(TOKEN)
+bot.run(TOKEN)
