@@ -30,7 +30,11 @@ async def turnip_price(ctx, arg1):
 
             elif ctx.message.author.mention in msg_part:
                 user, turnip_link = msg_part.split(" => ")
-                new_turnip_link = "| {} => {}{}.".format(user, turnip_link, arg1)
+                if "pattern" in turnip_link:
+                    turnip_link, pattern_part = turnip_link.split("&")
+                    new_turnip_link = "| {} => {}{}.&{}".format(user, turnip_link, arg1, pattern_part)
+                else:
+                    new_turnip_link = "| {} => {}{}.".format(user, turnip_link, arg1)
                 new_pin_content = new_pin_content+new_turnip_link
 
             else:
