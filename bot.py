@@ -40,7 +40,7 @@ async def turnip_price(ctx, arg1):
             else:
                 new_pin_content = new_pin_content+'| '+msg_part
     else:
-        new_pin_content = pin_content+"\n\n| {} => https://turnipprophet.io/?prices={}.".format(ctx.message.author.mention, arg1)
+        new_pin_content = pin_content+"\n\n| {} => https://turnipprophet.io/?prices={}.&pattern=".format(ctx.message.author.mention, arg1)
 
 
     #if ctx.message.author.mention in pin_content:
@@ -59,7 +59,7 @@ async def turnip_last_pattern(ctx, arg1):
     pin_content = last_pin.content
 
     if ctx.message.author.mention in pin_content:
-        new_pin_content = pin_content+"&pattern={}".format(pattern)
+        new_pin_content = pin_content+"{}".format(pattern)
     else:
         new_pin_content = pin_content+"""\n\n| {} => https://turnipprophet.io/?prices=.&pattern={}""".format(ctx.message.author.mention, pattern)
     await last_pin.edit(content=new_pin_content)
@@ -69,7 +69,7 @@ async def bot_setup(ctx):
     if ctx.author.id == 207867044140417025:
         await ctx.channel.purge(limit=None)
         message = await ctx.channel.send("STARTING")
-        msg_format = """__TURNIP STONKS__\n| {} => https://turnipprophet.io/?prices=""".format(ctx.message.author.mention)
+        msg_format = """__TURNIP STONKS__\n| {} => https://turnipprophet.io/?prices=&pattern=""".format(ctx.message.author.mention)
         await message.edit(content=msg_format)
         await message.pin()
         await ctx.message.delete()
