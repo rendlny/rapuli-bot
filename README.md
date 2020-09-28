@@ -19,5 +19,9 @@ Set your turnip price pattern<br>
 ```~pattern big-spike```<br>
 *pattern-options: big-spike | small-spike | random | idk | decreasing
 
-## Notes
+## Important
 Make sure to make a seperate channel for using this bot as once it has been set to and is used, the bot will delete any messages and clears out functions after use as to keep the channel clean so you can easily see the list of turnip prices created.
+
+## Project Status
+[Rapuli-Bot Trello](https://trello.com/b/BUUe6i2Q)<br>
+As of June 2020 this project is currently paused as I have taken a break from playing Animal Crossing New Horizons but I do hope to get back to it and get the last few bugs fixed up and implement some new features to make the bot even easier to use.
